@@ -3,10 +3,11 @@ const Workouts = require("../models/workouts.js");
 
 router.get("/api/workouts", ({ body }, res) => {
     
-    // console.log(res)
+    // I think this works
     Workouts.find({})
       .then(dbTransaction => {
         res.json(dbTransaction);
+        // console.log(dbTransaction);
         console.log("hi get")
       })
       .catch(err => {
@@ -14,39 +15,43 @@ router.get("/api/workouts", ({ body }, res) => {
       });
   });
 
+  //I think the put route works
+  router.put("/api/workouts/:id", ({ body, params }, res) => {
+      
+      console.log(body, params)
+      const id = params.id;
+      Workouts.findByIdAndUpdate({_id: id}, {$set: body})
+        .then(dbTransaction => {
+          res.json(dbTransaction);
+          console.log(dbTransaction)
+          console.log("hi put")
+        })
+        .catch(err => {
+          res.status(400).json(err);
+        });
+    });
   router.get("/api/workouts/range", ({ body }, res) => {
     
     // console.log(body)
-    Workouts.find({})
+    Workouts.findOne({})
       .then(dbTransaction => {
-        res.json(dbTransaction);
+        dbTransaction;
+        console.log(dbTransaction)
         console.log("hi get range")
       })
       .catch(err => {
         res.status(400).json(err);
       });
-  });
-
-router.put("/api/workouts/:id", ({ body }, res) => {
-    
-    console.log(body)
-    Workouts.updateMany(body)
-      .then(dbTransaction => {
-        res.json(dbTransaction);
-        console.log("hi put")
-      })
-      .catch(err => {
-        res.status(400).json(err);
-      });
-  });
-
+    });
+// I think this works. post an id like { _id: 5f57ee1d3c826b741d1460f3, __v: 0 } once you click new workout. 
 router.post("/api/workouts", ({ body }, res) => {
     
-    console.log(body)
+    
     Workouts.create(body)
       .then(dbTransaction => {
         res.json(dbTransaction);
-        console.log("hi post")
+        console.log(dbTransaction);
+        console.log("hi post");
       })
       .catch(err => {
         res.status(400).json(err);
