@@ -8,7 +8,7 @@ router.get("/api/workouts", ({ body }, res) => {
       .then(dbTransaction => {
         res.json(dbTransaction);
         // console.log(dbTransaction);
-        console.log("hi get")
+        // console.log("hi get")
       })
       .catch(err => {
         res.status(400).json(err);
@@ -33,11 +33,11 @@ router.get("/api/workouts", ({ body }, res) => {
   router.get("/api/workouts/range", ({ body }, res) => {
     
     // console.log(body)
-    Workouts.findOne({})
+    Workouts.find({})
       .then(dbTransaction => {
         dbTransaction;
-        console.log(dbTransaction)
-        console.log("hi get range")
+        // console.log(dbTransaction)
+        // console.log("hi get range")
       })
       .catch(err => {
         res.status(400).json(err);
